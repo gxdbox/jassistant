@@ -1,19 +1,13 @@
 package com.xd.utest;
 
+
 import org.assertj.core.api.Assertions;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
-import org.jeasy.random.FieldPredicates;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Random;
-
-import static java.nio.charset.Charset.forName;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for simple App.
@@ -47,11 +41,30 @@ public class AppTest {
     }
 
     @Test
-    public void test() {
+    public void custome_single_object() {
         EasyRandom easyRandom = new EasyRandom(parameters);
         Person person = easyRandom.nextObject(Person.class);
         System.out.println(person.getName());
         System.out.println(person.getHobby());
         System.out.println(person.getBirthday());
+    }
+
+    @Test
+    public void custome_mutil_levels() {
+        EasyRandom easyRandom = new EasyRandom(parameters);
+        Apple apple = easyRandom.nextObject(Apple.class);
+        System.out.println(apple.getStringValue());
+        System.out.println(apple.getIntValue());
+        System.out.println(apple.getLocalDateValue());
+
+        Banana banana = apple.getB();
+        System.out.println(banana.getStringValue());
+        System.out.println(banana.getIntValue());
+        System.out.println(banana.getLocalDateValue());
+
+        Cat cat = banana.getC();
+        System.out.println(cat.getStringValue());
+        System.out.println(cat.getIntValue());
+        System.out.println(cat.getLocalDateValue());
     }
 }
